@@ -14,5 +14,6 @@ app.use(cors());
 // port
 
 const PORT = 4000
-app.listen(PORT)
+const HOST = '35.160.120.126'
+app.listen(PORT, HOST)
 
