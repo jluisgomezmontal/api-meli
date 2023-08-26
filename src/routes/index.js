@@ -12,6 +12,9 @@ module.exports = function(){
   router.get('/', (req, res)=>{
     res.send('mercado libre TEST');
   });
+  router.get('/nosotros', (req, res)=>{
+    res.send('nosotros mercado libre TEST');
+  });
 
   return router;
 };
