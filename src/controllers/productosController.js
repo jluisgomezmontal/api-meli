@@ -1,5 +1,6 @@
 
 exports.mostrarProductos = async(req, res) =>{
+  res.header('Access-Control-Allow-Origin', '*');
   try {
     const url = `https://api.mercadolibre.com/sites/MLA/search?q=${req.params.query}`
     const response = await fetch(url);
@@ -25,13 +26,12 @@ exports.mostrarProductos = async(req, res) =>{
       }));
       ;
       res.json(productos);
-      res.header('Access-Control-Allow-Origin', '*');
     } catch (error) {
       console.log(error)
+    }
   }
-}
-exports.obtenerProducto = async(req, res) =>{
-
+  exports.obtenerProducto = async(req, res) =>{
+  res.header('Access-Control-Allow-Origin', '*');
   const url = `https://api.mercadolibre.com/items/${req.params.id}`
   const response = await fetch(url);
   const result = await response.json();
@@ -58,5 +58,4 @@ exports.obtenerProducto = async(req, res) =>{
    }
 
    res.json(producto);
-   res.header('Access-Control-Allow-Origin', '*');
   }
