@@ -1,5 +1,6 @@
 exports.mostrarProductos = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
+  console.debug(req.params.query);
   try {
     const url = `https://api.mercadolibre.com/sites/MLA/search?q=${req.params.query}`;
     const response = await fetch(url);
