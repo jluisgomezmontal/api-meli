@@ -16,8 +16,8 @@ exports.mostrarProductos = async (req, res) => {
           title: result.title,
           price: {
             currency: result.currency_id,
-            amount: result.price,
-            decimals: result.price,
+            amount: parseInt(result.price, 10),
+            decimals: result.price.toString().split(".")[1],
           },
           picture: `https://http2.mlstatic.com/D_${result.thumbnail_id}-O.jpg`,
           condition: result.condition,
@@ -52,8 +52,8 @@ exports.obtenerProducto = async (req, res) => {
       title: result.title,
       price: {
         currency: result.currency_id,
-        amount: result.price,
-        decimals: result.price,
+        amount: parseInt(result.price, 10),
+        decimals: result.price.toString().split(".")[1],
       },
       picture: result.pictures[0].url,
       condition: result.condition,
