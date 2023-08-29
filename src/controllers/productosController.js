@@ -39,6 +39,9 @@ exports.obtenerProducto = async (req, res) => {
   const responseDescripcion = await fetch(urlDescripcion);
   const result = await response.json();
   const resultDescripcion = await responseDescripcion.json();
+  const urlCategoria = `https://api.mercadolibre.com/categories/${result.category_id}`;
+  const responseCategoria = await fetch(urlCategoria);
+  const resultCategotia = await responseCategoria.json();
   const producto = {
     author: {
       name: "Jose Luis",
@@ -56,6 +59,7 @@ exports.obtenerProducto = async (req, res) => {
       condition: result.condition,
       free_shipping: result.shipping.free_shipping,
       sold_quantity: result.sold_quantity,
+      categoria: resultCategotia.name,
       description: resultDescripcion.plain_text,
     },
   };
