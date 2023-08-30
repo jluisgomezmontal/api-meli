@@ -1,7 +1,6 @@
-const express = require("express");
-const routes = require("./src/routes");
-const bodyParser = require("body-parser");
-const cors = require("cors");
+import express from "express";
+import routes from "./src/routes/index.js";
+import cors from "cors";
 
 // crear server
 

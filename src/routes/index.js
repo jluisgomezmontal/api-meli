@@ -1,14 +1,17 @@
-const express = require("express");
+import { Router } from "express";
 
-const router = express.Router();
+const router = Router();
 
-const productosController = require("../controllers/productosController");
+import {
+  mostrarProductos,
+  obtenerProducto,
+} from "../controllers/productosController.js";
 
-module.exports = function () {
+export default function () {
   // obtener productos
-  router.get("/api/:query", productosController.mostrarProductos);
+  router.get("/api/:query", mostrarProductos);
 
-  router.get("/api/items/:id", productosController.obtenerProducto);
+  router.get("/api/items/:id", obtenerProducto);
 
   router.get("/", (req, res) => {
     res.send("mercado libre TEST");
@@ -18,4 +21,4 @@ module.exports = function () {
   });
 
   return router;
-};
+}

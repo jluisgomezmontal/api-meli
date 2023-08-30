@@ -1,6 +1,6 @@
-const axios = require("axios");
+import axios from "axios";
 
-exports.mostrarProductos = async (req, res) => {
+export const mostrarProductos = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   try {
     const url = `https://api.mercadolibre.com/sites/MLA/search?q=${req.params.query}`;
@@ -34,7 +34,7 @@ exports.mostrarProductos = async (req, res) => {
   }
 };
 
-exports.obtenerProducto = async (req, res) => {
+export const obtenerProducto = async (req, res) => {
   res.header("Access-Control-Allow-Origin", "*");
   const url = `https://api.mercadolibre.com/items/${req.params.id}`;
   const urlDescripcion = `https://api.mercadolibre.com/items/${req.params.id}/description`;

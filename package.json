@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "server de la prueba de mercado libre",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "nodemon ./index.js"
   },
