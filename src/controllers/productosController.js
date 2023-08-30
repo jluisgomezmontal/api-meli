@@ -1,11 +1,19 @@
+// Importamos el módulo axios para realizar solicitudes HTTP
 import axios from "axios";
 
+// Controlador para mostrar una lista de productos según un criterio de búsqueda
 export const mostrarProductos = async (req, res) => {
+  // Establecemos encabezado para permitir solicitudes de origen cruzado
   res.header("Access-Control-Allow-Origin", "*");
   try {
+    // Construimos la URL de la API de MercadoLibre utilizando el parámetro de búsqueda
     const url = `https://api.mercadolibre.com/sites/MLA/search?q=${req.params.query}`;
+
+    // Realizamos la solicitud GET a la URL
     const response = await axios.get(url);
     const results = response.data;
+
+    // Mapeamos los resultados para obtener la información necesaria de los productos
     const productos = results.results.map((result, idx) => {
       return {
         author: {
@@ -28,28 +36,38 @@ export const mostrarProductos = async (req, res) => {
         },
       };
     });
+
+    // Enviamos la respuesta en formato JSON con la información de los productos
     res.json(productos);
   } catch (error) {
     console.log(error);
   }
 };
 
+// Controlador para obtener información detallada de un producto por su ID
 export const obtenerProducto = async (req, res) => {
+  // Establecemos encabezado para permitir solicitudes de origen cruzado
   res.header("Access-Control-Allow-Origin", "*");
+
+  // Construimos las URLs de las APIs de MercadoLibre para obtener información del producto y su descripción
   const url = `https://api.mercadolibre.com/items/${req.params.id}`;
   const urlDescripcion = `https://api.mercadolibre.com/items/${req.params.id}/description`;
 
   try {
+    // Realizamos las solicitudes GET a las URLs
     const response = await axios.get(url);
     const responseDescripcion = await axios.get(urlDescripcion);
 
+    // Obtenemos los resultados de las respuestas
     const result = response.data;
     const resultDescripcion = responseDescripcion.data;
 
+    // Construimos la URL de la categoría del producto
     const urlCategoria = `https://api.mercadolibre.com/categories/${result.category_id}`;
     const responseCategoria = await axios.get(urlCategoria);
     const resultCategoria = responseCategoria.data;
 
+    // Construimos el objeto de producto con la información obtenida
     const producto = {
       author: {
         name: "Jose Luis",
@@ -72,6 +90,7 @@ export const obtenerProducto = async (req, res) => {
       },
     };
 
+    // Enviamos la respuesta en formato JSON con la información del producto
     res.json(producto);
   } catch (error) {
     console.log(error);
